@@ -16,6 +16,7 @@ Magnus
 Usage
 --------
 1. Create instance of Slim
+2. Add a before.dispatch hook or middleware (in the example it's done by hook)
 2. Add resources to the ResourceMapper which should be cached (Wildcards allowed!)
 3. Create instance of Slim\Http\Caching\ResourceMapper();
 4. Inject your own ResourceHandler into ResourceMapper
@@ -31,23 +32,26 @@ Example
 	
 	# Add resource '/fetch/my/resource/' to my cache list
 	Slim\Http\Caching\ResourceMapper::addResourceWildcard( '/fetch/my/resource/', 24 );
-	
-	# If you want to cache more than one resource
+
+	# It's also possible to pass a Array with the resource wildcards
 	Slim\Http\Caching\ResourceMapper::addResourceWildcard(
 		Array(
-			'/fetch/my/resource/' => 24,
-			'/fetch/my/second/resource/' => 5,
-			'/fetch/products/list/' => 1
+			// Moderator data and list
+			'/fetch/moderator/data/' => 24,
+			'/fetch/moderator/list/' => 24,
 		)
-	);
+	);	
 	
-	# Create instance of the ResourceMapper
-	$cachingManager = new Slim\Http\Caching\ResourceMapper();
-	
-	# Inject Handler and Slim Application and set Headers
-    $cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
-        ->setApplication( $app )
-        ->setHeaders();
+	# ADd slim.before.dispatch to evaluate if resource is or should be cached
+	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
+
+		$cachingManager = new Slim\Http\Caching\ResourceMapper();
+
+		$cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
+			->setApplication( $app )
+			->setHeaders();
+
+	});
 
 	?>
 	
