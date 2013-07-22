@@ -1,6 +1,8 @@
 SlimCachingManager
 ==================
 
+Works under https://github.com/codeguy/Slim 2.3.0
+
 If you want to do dynamic caching of slim resources feel free to use the **SlimCachingManager**. You can inject resources (+ lifetime) into the *ResourceMapper* which should be cached.
 
 The data of the given resources is being stored by individual *ResourceHandlers* (Database, textfile etc.). You can write your own handlers by implementing the *IResourceHandler* Interface. You can find two examples for *ResourceHandlers* in the "Ezd" directory.
