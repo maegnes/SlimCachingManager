@@ -30,26 +30,19 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace Slim\Http\Caching;
-use Slim;
 
-/**
- * Slim IResourceManager
- *
- * Interface for all ResourceMappers
- *
- * @package Slim\Http\Caching
- * @author Magnus Buk <MagnusBuk@gmx.de>
- */
-interface IResourceMapper {
+interface IResource {
 
-    public function setApplication( Slim\Slim $app );
+    public function setResource( $resource = null );
 
-    public function getApplication();
+    public function getResource();
 
-    public function setHandler( IResourceHandler $handler );
+    public function setEtag( $etag = null );
 
-    public function getHandler();
+    public function getEtag();
 
-    public function setHeaders();
+    public function setLifetime( $lifetime = 0 );
+
+    public function getLifetime();
 
 }

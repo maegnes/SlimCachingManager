@@ -1,6 +1,6 @@
 <?php
 /**
- * Slim Cache Manager for the Slim Framework
+ * HTTP Caching for the Slim Framework
  *
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
@@ -30,26 +30,73 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace Slim\Http\Caching;
-use Slim;
 
-/**
- * Slim IResourceManager
- *
- * Interface for all ResourceMappers
- *
- * @package Slim\Http\Caching
- * @author Magnus Buk <MagnusBuk@gmx.de>
- */
-interface IResourceMapper {
+class Resource implements IResource {
 
-    public function setApplication( Slim\Slim $app );
+    /**
+     * URI of the current resource
+     *
+     * @access protected
+     * @var String
+     */
+    protected $_resource = null;
 
-    public function getApplication();
+    /**
+     * ETag for the current resource
+     *
+     * @access protected
+     * @var String
+     */
+    protected $_eTag = null;
 
-    public function setHandler( IResourceHandler $handler );
+    /**
+     * Lifetime in hours for the current resource
+     *
+     * @access protected
+     * @var int
+     */
+    protected $_lifeTime = null;
 
-    public function getHandler();
+    /**
+     * @param null $eTag
+     */
+    public function setETag( $eTag = null ) {
+        $this->_eTag = $eTag;
+    }
 
-    public function setHeaders();
+    /**
+     * @return null
+     */
+    public function getETag() {
+        return $this->_eTag;
+    }
+
+    /**
+     * @param null $lifeTime
+     */
+    public function setLifeTime( $lifeTime = 0 ) {
+        $this->_lifeTime = $lifeTime;
+    }
+
+    /**
+     * @return null
+     */
+    public function getLifeTime() {
+        return $this->_lifeTime;
+    }
+
+    /**
+     * @param null $resource
+     */
+    public function setResource( $resource = null ) {
+        $this->_resource = $resource;
+    }
+
+    /**
+     * @return null
+     */
+    public function getResource() {
+        return $this->_resource;
+    }
 
 }
