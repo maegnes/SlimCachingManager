@@ -47,7 +47,7 @@ Example
 	# ADd slim.before.dispatch to evaluate if resource is or should be cached
 	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
 
-		$cachingManager = new Slim\Http\Caching\ResourceMapper();
+		$cachingManager = new Slim\Http\Caching\ResourceMapper\Etag();
 
 		$cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
 			->setApplication( $app )

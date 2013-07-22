@@ -56,7 +56,7 @@ interface IResourceHandler {
      * @param $resource
      * @return IResource
      */
-    public function read( $resource );
+    public function read( $resource = null );
 
     /**
      * Garbage Collector - clear expired cache resources

@@ -29,7 +29,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching;
+namespace Slim\Http\Caching\ResourceMapper;
 use Slim;
 
 /**
@@ -46,7 +46,7 @@ interface IResourceMapper {
 
     public function getApplication();
 
-    public function setHandler( IResourceHandler $handler );
+    public function setHandler( \Slim\Http\Caching\IResourceHandler $handler );
 
     public function getHandler();
 
