@@ -1,6 +1,11 @@
 SlimCachingManager
 ==================
 
+If you want to outsource the lifetime of your resource caches you can use the SlimCachingManager. It allows you to add resources (wildcard possible) to your application. SlimCachingManager will add the resources to your own data adapter (e.g. Database).
+
+The storage (ResourceHandler) stores the data for resource, etag, lifetime and expiry date and will set the HTTP headers automatically. If the resource is out of date you can use the gc() method
+tgo rebuild the cache.
+
 Usage
 --------
 1. Create instance of Slim
