@@ -12,11 +12,22 @@ Usage
 
 Example
 --------
-`<code>
-<?php
+	<?php
+	
+	$app = new \Slim\Slim();
+	
+	// Add resource '/fetch/my/resource/' to my cache list
+	Slim\Http\Caching\ResourceMapper::addResourceWildcard( '/fetch/my/resource/', 24 );
+	
+	# Create instance of the ResourceMapper
+	$cachingManager = new Slim\Http\Caching\ResourceMapper();
+	
+    $cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
+        ->setApplication( $app )
+        ->setHeaders();
 
-echo "TEST";
+	?>
+	
+That's it. ETag and Expires will be set automatically.
 
-?>
-`
-<code>
+Have fun!
