@@ -45,4 +45,8 @@ interface IResource {
 
     public function getLifetime();
 
+    public function setExpiryDate( $date = null );
+
+    public function getExpiryDate();
+
 }

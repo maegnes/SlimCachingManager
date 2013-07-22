@@ -58,6 +58,11 @@ class Resource implements IResource {
     protected $_lifeTime = null;
 
     /**
+     * @var String
+     */
+    protected $_expiryDate = null;
+
+    /**
      * @param null $eTag
      */
     public function setETag( $eTag = null ) {
@@ -97,6 +102,20 @@ class Resource implements IResource {
      */
     public function getResource() {
         return $this->_resource;
+    }
+
+    /**
+     * @param String $expiryDate
+     */
+    public function setExpiryDate( $expiryDate = null ) {
+        $this->_expiryDate = $expiryDate;
+    }
+
+    /**
+     * @return String
+     */
+    public function getExpiryDate() {
+        return $this->_expiryDate;
     }
 
 }

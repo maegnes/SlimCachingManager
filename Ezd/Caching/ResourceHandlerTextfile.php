@@ -2,13 +2,13 @@
 /**
  * My own ResourceHandler for the usage with Slim Caching Manager
  *
- * Write and read cached resources to database
+ * Write and read cached resources to textfile
  *
  * @author Magnus Buk <Magnus.Buk@gmx.de>
  */
 namespace Ezd\Caching;
 
-class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
+class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
 
     /**
      * Holds the cached resources
@@ -21,15 +21,14 @@ class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
     /**
      * @var null
      */
-    private $_db = null;
+    private $_file = 'cache.txt';
 
     /**
      * Constructor. inject database connection and fetch caching data
      *
      * @access public
      */
-    public function __construct( $db = null) {
-        $this->_db = $db;
+    public function __construct() {
         $this->_readData();
     }
 
@@ -50,10 +49,15 @@ class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
      * @return void
      */
     public function _readData() {
-        $query = $this->_db->getDb()->execute( "SELECT * FROM api_cache_lifetime" );
-        while( $res = $query->fetchRow() ) {
-            $this->_data[$res['resource']] = $res;
+
+        if( !file_exists( $this->_file ) ) {
+            $handle = fopen( $this->_file, 'a' );
+            fwrite( $handle, 'a:0:{}' );
+            fclose( $handle );
         }
+
+        $this->_data = unserialize( file_get_contents( $this->_file ) );
+
     }
 
     /**
@@ -78,9 +82,14 @@ class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
 
         if( !array_key_exists( $resource, $this->_data ) ) {
 
-            $this->_db->getDb()->execute(
-                "EXEC usp_app_generate_cache_resource '{$resource}', {$lifetime}"
+            $this->_data[$resource] = Array(
+                'resource' => $resource,
+                'etag' => uniqid( 'ET' ),
+                'lifetime' => $lifetime,
+                'expiry_date' => date( 'Y-m-d H:i:s', strtotime( '+' . $lifetime . ' hours' ) )
             );
+
+            file_put_contents( $this->_file, serialize( $this->_data ) );
 
             $this->_readData();
 
@@ -97,7 +106,14 @@ class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
      * @return bool
      */
     public function gc() {
-        # Done by cronjobs
+
+        foreach( $this->_data as $resource => $data ) {
+            if( strtotime( $data['expiry_date'] ) < time() )
+                unset( $this->_data[$resource] );
+        }
+
+        file_put_contents( $this->_file, serialize( $this->_data ) );
+
     }
 
     /**
