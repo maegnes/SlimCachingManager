@@ -16,12 +16,12 @@ Magnus
 Usage
 --------
 1. Create instance of Slim
-2. Add a before.dispatch hook or middleware (in the example it's done by hook)
 2. Add resources to the ResourceMapper which should be cached (Wildcards allowed!)
-3. Create instance of Slim\Http\Caching\ResourceMapper();
-4. Inject your own ResourceHandler into ResourceMapper
-5. Inject the Slim application into ResourceMapper
-6. Call method setHeaders()
+3. Add a before.dispatch hook or middleware (in the example it's done by hook)
+4. Create instance of Slim\Http\Caching\ResourceMapper();
+5. Inject your own ResourceHandler into ResourceMapper
+6. Inject the Slim application into ResourceMapper
+7. Call method setHeaders()
 
 Example
 --------
