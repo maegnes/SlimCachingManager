@@ -14,14 +14,25 @@ Example
 --------
 	<?php
 	
+	# Create Slim instance
 	$app = new \Slim\Slim();
 	
-	// Add resource '/fetch/my/resource/' to my cache list
+	# Add resource '/fetch/my/resource/' to my cache list
 	Slim\Http\Caching\ResourceMapper::addResourceWildcard( '/fetch/my/resource/', 24 );
+	
+	# If you want to cache more than one resource
+	Slim\Http\Caching\ResourceMapper::addResourceWildcard(
+		Array(
+			'/fetch/my/resource/' => 24,
+			'/fetch/my/second/resource/' => 5,
+			'/fetch/products/list/ => 1
+		)
+	);
 	
 	# Create instance of the ResourceMapper
 	$cachingManager = new Slim\Http\Caching\ResourceMapper();
 	
+	# Inject Handler and Slim Application and set Headers
     $cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
         ->setApplication( $app )
         ->setHeaders();
