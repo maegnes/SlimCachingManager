@@ -25,7 +25,7 @@ Example
 		Array(
 			'/fetch/my/resource/' => 24,
 			'/fetch/my/second/resource/' => 5,
-			'/fetch/products/list/ => 1
+			'/fetch/products/list/' => 1
 		)
 	);
 	
