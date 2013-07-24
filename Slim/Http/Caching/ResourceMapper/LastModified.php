@@ -1,7 +1,8 @@
 <?php
+// In work!
 namespace Slim\Http\Caching\ResourceMapper;
 
-class ResourceMapper_LastModified extends Base {
+class LastModified extends Base {
 
 	public function setHeaders() {
 
