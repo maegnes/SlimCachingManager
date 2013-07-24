@@ -20,7 +20,7 @@ Usage
 1. Create instance of Slim
 2. Add resources to the ResourceMapper which should be cached (Wildcards allowed!)
 3. Add a before.dispatch hook or middleware (in the example it's done by hook)
-4. Create instance of Slim\Http\Caching\ResourceMapper\Etag();
+4. Create instance of Slim\Http\Caching\ResourceMapper\Etag() or Slim\Http\Caching\ResourceMapper\Lastmodified() (depends on needed cache method)
 5. Inject your own ResourceHandler into ResourceMapper
 6. Inject the Slim application into ResourceMapper
 7. Call method setHeaders()
@@ -33,10 +33,10 @@ Example
 	$app = new \Slim\Slim();
 	
 	# Add resource '/fetch/my/resource/' to my cache list
-	Slim\Http\Caching\ResourceMapper::addResourceWildcard( '/fetch/my/resource/', 24 );
+	Slim\Http\Caching\ResourceMapper\Base::addResourceWildcard( '/fetch/my/resource/', 24 );
 
 	# It's also possible to pass a Array with the resource wildcards
-	Slim\Http\Caching\ResourceMapper::addResourceWildcard(
+	Slim\Http\Caching\ResourceMapper\Base::addResourceWildcard(
 		Array(
 			// Moderator data and list
 			'/fetch/moderator/data/' => 24,
@@ -44,7 +44,6 @@ Example
 		)
 	);	
 	
-	# ADd slim.before.dispatch to evaluate if resource is or should be cached
 	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
 
 		$cachingManager = new Slim\Http\Caching\ResourceMapper\Etag();
