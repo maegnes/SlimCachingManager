@@ -29,7 +29,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching;
+namespace Slim\Http\Caching\ResourceMapper;
 use Slim\Slim, Exception;
 
 /**
@@ -40,7 +40,7 @@ use Slim\Slim, Exception;
  * @package Slim\Http\Caching
  * @author Magnus Buk <MagnusBuk@gmx.de>
  */
-class ResourceMapper implements IResourceMapper {
+abstract class Base implements IResourceMapper {
 
     /**
      * Holds the resources which should be cached
