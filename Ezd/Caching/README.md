@@ -13,5 +13,5 @@ The following data should be stored for each resource to your data adapter:
 
 I've added two examples for ResourceHandlers.
 
-**ResourceHandler.php**: Stores the data in a database
-**ResourceHandlerTextfile.php**: Stores the serialized data in a textfile. (not recommended for production!)
+1. **ResourceHandler.php**: Stores the data in a database
+2. **ResourceHandlerTextfile.php**: Stores the serialized data in a textfile. (not recommended for production!)
