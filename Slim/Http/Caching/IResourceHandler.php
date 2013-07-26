@@ -1,6 +1,6 @@
 <?php
 /**
- * Slim Cache Manager for the Slim Framework
+ * Slim Caching Manager for the Slim Framework
  *
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
