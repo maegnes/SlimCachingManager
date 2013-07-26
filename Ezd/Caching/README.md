@@ -9,3 +9,4 @@ The following data should be stored for each resource to your data adapter:
 2. etag (String)
 3. lifetime (int)
 4. expiry_date (datetime)
+5. last_modified (datetime) (just needed if you want to have lastmodified-caching)
