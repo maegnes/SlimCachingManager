@@ -3,14 +3,15 @@ SlimCachingManager
 
 Works under https://github.com/codeguy/Slim 2.3.0
 
-If you want to do dynamic caching of slim resources feel free to use the **SlimCachingManager**. You can inject resources (+ lifetime) into the *ResourceMapper* which should be cached.
+The **SlimCachingManager** helps you to simlpify caching and the delivery of the cached data of the Slim Framework resources. It stores the caching data for each resource (etag, expiry, lastmodified) in ResourceHandlers
+which can be written on your own by implementing the *IResourceHandler*.
 
-The data of the given resources is being stored by individual *ResourceHandlers* (Database, textfile etc.). You can write your own handlers by implementing the *IResourceHandler* Interface. You can find two examples for *ResourceHandlers* in the "Ezd" directory.
-The *ResourceHandler* provides methods for read() and write() data (e.g. etag, expiry date and lifetime) for the current resource. It's also possible to implement a garbage collector which will remove the cache if the resource is out of date.
+It's helpful for resources which doesn't have any physical changes to detect that the resource has been changed (e.g. database query results). It's possible to define resources (wildcard notation possible) which you'd like to be cached. SlimCachingManager will
+automatically check if the resource should or is being cached at the moment. The rest is just amazement.
 
-Just follow the steps at the bottom of the page ("Usage"). **SlimCachingManager** will set etags, expiry and lastmodified headers on his own.
+You want to use SlimCaching Manager? Just follow the steps at the bottom of the page. All your headers (Etag, Lastmodified, expiry) will be set by SlimCachingManager.
 
-If you have any questions or suggestions to improve **SlimCachingManager** feel free to ask or fork the repo.
+If you have any questions or suggestions to improve **SlimCachingManager** feel free to contact me. If you want to contribute just add a new branch and send me a pull request.
 
 Best regards
 Magnus
