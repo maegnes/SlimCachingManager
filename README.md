@@ -45,10 +45,13 @@ Example
 		)
 	);	
 	
+	# You could also use a middleware. For that simple example i used a before.dispatch hook.
 	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
 
+		# Create instance of your wished ResourceMapper (Etag() or Lastmodified())
 		$cachingManager = new Slim\Http\Caching\ResourceMapper\Etag();
 
+		# Inject your ResourceHandler, Slim instance and finally set the headers
 		$cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
 			->setApplication( $app )
 			->setHeaders();
