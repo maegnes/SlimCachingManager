@@ -31,6 +31,10 @@
  */
 namespace Slim\Http\Caching;
 
+/**
+ * Class Resource
+ * @package Slim\Http\Caching
+ */
 class Resource implements IResource {
 
     /**
@@ -48,6 +52,13 @@ class Resource implements IResource {
      * @var String
      */
     protected $_eTag = null;
+
+    /**
+     * Time when the resource has changed for the last time
+     *
+     * @var String
+     */
+    protected $_lastModified = null;
 
     /**
      * Lifetime in hours for the current resource
@@ -116,6 +127,22 @@ class Resource implements IResource {
      */
     public function getExpiryDate() {
         return $this->_expiryDate;
+    }
+
+    /**
+     * @param String $lastModified
+     */
+    public function setLastModified( $lastModified = null ) {
+        if( !is_null( $lastModified ) && !strtotime( $lastModified ) )
+            throw new \Exception( 'invalid date given' );
+        $this->_lastModified = $lastModified;
+    }
+
+    /**
+     * @return String
+     */
+    public function getLastModified() {
+        return strtotime( $this->_lastModified );
     }
 
 }

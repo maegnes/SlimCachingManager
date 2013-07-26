@@ -12,11 +12,8 @@ class LastModified extends Base {
 
 		if( $res instanceof \Slim\Http\Caching\IResource ) {
 
-			// Set ETag
-			$this->getApplication()->etag( $res->getEtag() );
-
-			// Also set the "expires"-Header
-			$this->getApplication()->expires( '+' . $res->getLifetime() . ' hours' );
+			// Set Last Modified date
+			$this->getApplication()->lastModified( $res->getLastModified() );
 
 		}
 

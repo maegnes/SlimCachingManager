@@ -49,4 +49,8 @@ interface IResource {
 
     public function getExpiryDate();
 
+    public function setLastModified( $lastModified = null );
+
+    public function getLastModified();
+
 }
