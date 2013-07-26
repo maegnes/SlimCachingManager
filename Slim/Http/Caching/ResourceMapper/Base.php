@@ -110,7 +110,7 @@ abstract class Base implements IResourceMapper {
      * Set the resource handler
      *
      * @access public
-     * @param IResourceHandler $handler
+     * @param \Slim\Http\Caching\IResourceHandler $handler
      * @return self
      */
     public function setHandler( \Slim\Http\Caching\IResourceHandler $handler ) {
