@@ -64,7 +64,7 @@ class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
      * @return \Slim\Http\Caching\IResource
      */
     public function read( $resource = null ) {
-        return ( is_array( $this->_data[$resource] ) ) ? $this->getObject( $this->_data[$resource] ) : null;
+        return ( array_key_exists( $resource, $this->_data ) ) ? $this->getObject( $this->_data[$resource] ) : null;
     }
 
     /**
@@ -113,6 +113,7 @@ class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
         $obj->setResource( $res['resource'] );
         $obj->setLifeTime( $res['lifetime'] );
         $obj->setExpiryDate( $res['clear_cache'] );
+        $obj->setLastModified( $res['last_modified'] );
         return $obj;
     }
 }

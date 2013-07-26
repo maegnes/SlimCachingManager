@@ -86,7 +86,8 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
                 'resource' => $resource,
                 'etag' => uniqid( 'ET' ),
                 'lifetime' => $lifetime,
-                'expiry_date' => date( 'Y-m-d H:i:s', strtotime( '+' . $lifetime . ' hours' ) )
+                'expiry_date' => date( 'Y-m-d H:i:s', strtotime( '+' . $lifetime . ' hours' ) ),
+                'last_modified' => date( 'Y-m-d H:i:s', time() )
             );
 
             file_put_contents( $this->_file, serialize( $this->_data ) );
@@ -129,6 +130,7 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
         $obj->setResource( $res['resource'] );
         $obj->setLifeTime( $res['lifetime'] );
         $obj->setExpiryDate( $res['clear_cache'] );
+        $obj->setLastModified( $res['last_modified'] );
         return $obj;
     }
 }
