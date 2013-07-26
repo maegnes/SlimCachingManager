@@ -1,4 +1,4 @@
-Writing your own ResourceHandler
+Write your own ResourceHandler
 ==================
 
 If you want to write your own *ResourceHandler* for the **SlimCachingManager** just write a class in a namespace of your choice and implement *\Slim\Http\Caching\IResourceHandler*.
@@ -10,3 +10,8 @@ The following data should be stored for each resource to your data adapter:
 3. lifetime (int)
 4. expiry_date (datetime)
 5. last_modified (datetime) (just needed if you want to have lastmodified-caching)
+
+I've added two examples for ResourceHandlers.
+
+**ResourceHandler.php**: Stores the data in a database
+**ResourceHandlerTextfile.php**: Stores the serialized data in a textfile. (not recommended for production!)
