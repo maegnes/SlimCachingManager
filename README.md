@@ -8,7 +8,7 @@ If you want to do dynamic caching of slim resources feel free to use the **SlimC
 The data of the given resources is being stored by individual *ResourceHandlers* (Database, textfile etc.). You can write your own handlers by implementing the *IResourceHandler* Interface. You can find two examples for *ResourceHandlers* in the "Ezd" directory.
 The *ResourceHandler* provides methods for read() and write() data (e.g. etag, expiry date and lifetime) for the current resource. It's also possible to implement a garbage collector which will remove the cache if the resource is out of date.
 
-Just follow the steps at the bottom of the page ("Usage"). **SlimCachingManager** will set etags and expiry headers on his own.
+Just follow the steps at the bottom of the page ("Usage"). **SlimCachingManager** will set etags, expiry and lastmodified headers on his own.
 
 If you have any questions or suggestions to improve **SlimCachingManager** feel free to ask or fork the repo.
 
