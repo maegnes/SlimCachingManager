@@ -9,7 +9,7 @@ which can be written on your own by implementing the *IResourceHandler*.
 It's helpful for resources which doesn't have any physical changes to detect that the resource has been changed (e.g. database query results). It's possible to define resources (wildcard notation possible) which you'd like to be cached. SlimCachingManager will
 automatically check if the resource should or is being cached at the moment. The rest is just amazement.
 
-You want to use SlimCaching Manager? Just follow the steps at the bottom of the page. All your headers (Etag, Lastmodified, expiry) will be set by SlimCachingManager.
+You want to use **SlimCachingManager**? Just follow the steps at the bottom of the page. All your headers (Etag, Lastmodified, expiry) will be set by **SlimCachingManager**.
 
 If you have any questions or suggestions to improve **SlimCachingManager** feel free to contact me. If you want to contribute just add a new branch and send me a pull request.
 
