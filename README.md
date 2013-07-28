@@ -6,7 +6,7 @@ Works under https://github.com/codeguy/Slim 2.3.0
 The **SlimCachingManager** helps you to simlpify caching and the delivery of the cached data of the Slim Framework resources. It stores the caching data for each resource (etag, expiry, lastmodified) in ResourceHandlers
 which can be written on your own by implementing the *IResourceHandler*.
 
-It's helpful for resources which doesn't have any physical changes to detect that the resource has been changed (e.g. database query results). It's possible to define resources (wildcard notation possible) which you'd like to be cached. SlimCachingManager will
+It's helpful for resources which doesn't have any physical changes to detect that the resource has been changed (e.g. database query results). It's possible to define resources (wildcard notation possible) which you'd like to have cached. SlimCachingManager will
 automatically check if the resource should or is being cached at the moment. The rest is just amazement.
 
 You want to use **SlimCachingManager**? Just follow the steps at the bottom of the page. All your headers (Etag, Lastmodified, expiry) will be set by **SlimCachingManager**.
