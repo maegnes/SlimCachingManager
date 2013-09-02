@@ -31,15 +31,23 @@
  */
 namespace Slim\Http\Caching\ResourceMapper;
 
-class Etag extends Base {
+use Slim\Http\Caching as SlimCaching;
 
-    public abstract function setHeaders() {
+class ETag extends Base {
+
+    /**
+     * Set the headers which are needed for ETag caching
+     *
+     * @access public
+     * @return void
+     */
+    public function setHeaders() {
 
         $this->_prepareResource();
 
         $res = $this->getHandler()->read( $this->_resource );
 
-        if( $res instanceof \Slim\Http\Caching\IResource ) {
+        if( $res instanceof SlimCaching\IResource ) {
 
             // Set ETag
             $this->getApplication()->etag( $res->getEtag() );
@@ -50,5 +58,4 @@ class Etag extends Base {
         }
 
     }
-
 }

@@ -132,12 +132,12 @@ abstract class Base implements IResourceMapper {
     }
 
     /**
-     * Method checks if current resource should or is being cached. If yes ETag and expire date are being set
+     * Abstract method to set the needed headed for the choosen caching method
      *
      * @access public
      * @return void
      */
-    abstract public function setHeaders();
+    public abstract function setHeaders();
 
     /**
      * (1) Prepares the resource uri and formats it to correct syntax.

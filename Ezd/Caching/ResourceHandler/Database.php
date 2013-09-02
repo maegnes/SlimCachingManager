@@ -6,9 +6,9 @@
  *
  * @author Magnus Buk <Magnus.Buk@gmx.de>
  */
-namespace Ezd\Caching;
+namespace Ezd\Caching\ResourceHandler;
 
-class ResourceHandler implements \Slim\Http\Caching\IResourceHandler {
+class Database implements \Slim\Http\Caching\IResourceHandler {
 
     /**
      * Holds the cached resources

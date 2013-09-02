@@ -1,14 +1,14 @@
 <?php
 /**
- * My own ResourceHandler for the usage with Slim Caching Manager
+ * Base class for the Filestore ResourceHandlers
  *
- * Write and read cached resources to textfile
- *
- * @author Magnus Buk <Magnus.Buk@gmx.de>
+ * @author Magnus Buk <MagnusBuk@gmx.de>
  */
-namespace Ezd\Caching;
+namespace Ezd\Caching\ResourceHandler\FileStore;
 
-class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
+use \Slim\Http\Caching as SlimCaching;
+
+abstract class Base {
 
     /**
      * Holds the cached resources
@@ -21,14 +21,16 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
     /**
      * @var null
      */
-    private $_file = 'cache.txt';
+    protected $_file = 'cache.json';
 
     /**
-     * Constructor. inject database connection and fetch caching data
+     * Constructor. inject json file (optional)
      *
-     * @access public
+     * @param String $file
      */
-    public function __construct() {
+    public function __construct( $file = null ) {
+        if( !is_null( $file ) )
+            $this->_file = $file;
         $this->_readData();
     }
 
@@ -52,11 +54,11 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
 
         if( !file_exists( $this->_file ) ) {
             $handle = fopen( $this->_file, 'a' );
-            fwrite( $handle, 'a:0:{}' );
+            fwrite( $handle, $this->writeFormat( Array() ) );
             fclose( $handle );
         }
 
-        $this->_data = unserialize( file_get_contents( $this->_file ) );
+        $this->_data = $this->readFormat( file_get_contents( $this->_file ) );
 
     }
 
@@ -68,7 +70,7 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
      * @return \Slim\Http\Caching\IResource
      */
     public function read( $resource = null ) {
-        return ( is_array( $this->_data[$resource] ) ) ? $this->getObject( $this->_data[$resource] ) : null;
+        return ( array_key_exists( $resource, $this->_data ) ) ? $this->getObject( $this->_data[$resource] ) : null;
     }
 
     /**
@@ -87,10 +89,11 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
                 'etag' => uniqid( 'ET' ),
                 'lifetime' => $lifetime,
                 'expiry_date' => date( 'Y-m-d H:i:s', strtotime( '+' . $lifetime . ' hours' ) ),
+                'clear_cache' => date( 'Y-m-d H:i:s', strtotime( '+' . $lifetime . ' hours' ) ),
                 'last_modified' => date( 'Y-m-d H:i:s', time() )
             );
 
-            file_put_contents( $this->_file, serialize( $this->_data ) );
+            file_put_contents( $this->_file, $this->writeFormat( $this->_data ) );
 
             $this->_readData();
 
@@ -113,7 +116,7 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
                 unset( $this->_data[$resource] );
         }
 
-        file_put_contents( $this->_file, serialize( $this->_data ) );
+        file_put_contents( $this->_file, $this->writeFormat( $this->_data ) );
 
     }
 
@@ -125,7 +128,7 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
      * @return Resource
      */
     public function getObject( $res = Array() ) {
-        $obj = new \Slim\Http\Caching\Resource();
+        $obj = new SlimCaching\Resource();
         $obj->setETag( $res['etag'] );
         $obj->setResource( $res['resource'] );
         $obj->setLifeTime( $res['lifetime'] );
@@ -133,4 +136,21 @@ class ResourceHandlerTextfile implements \Slim\Http\Caching\IResourceHandler {
         $obj->setLastModified( $res['last_modified'] );
         return $obj;
     }
+
+    /**
+     * Write the text based data as json
+     *
+     * @param $data
+     * @return string
+     */
+    public abstract function writeFormat( $data );
+
+    /**
+     * Read the text based stored data as json
+     *
+     * @param $data
+     * @return mixed
+     */
+    public abstract function readFormat( $data );
+
 }
