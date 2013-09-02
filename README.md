@@ -3,7 +3,7 @@ SlimCachingManager
 
 Works under https://github.com/codeguy/Slim 2.3.0
 
-The **SlimCachingManager** helps you to simlpify caching and the delivery of the cached data of the Slim Framework resources. It stores the caching data for each resource (etag, expiry, lastmodified) in ResourceHandlers
+The **SlimCachingManager** helps you to simplify caching and the delivery of the cached data of the Slim Framework resources. It stores the caching data for each resource (etag, expiry, lastmodified etc.) in ResourceHandlers
 which can be written on your own by implementing the *IResourceHandler*.
 
 It's helpful for resources which doesn't have any physical changes to detect that the resource has been changed (e.g. database query results). It's possible to define resources (wildcard notation possible) which you'd like to have cached. SlimCachingManager will
@@ -30,13 +30,13 @@ Example
 --------
 	<?php
 	
-	# Create Slim instance
+	# 1. Create Slim instance
 	$app = new \Slim\Slim();
 	
-	# Add resource '/fetch/my/resource/' to my cache list
+	# 2a. Add resource '/fetch/my/resource/' to my cache list
 	Slim\Http\Caching\ResourceMapper\Base::addResourceWildcard( '/fetch/my/resource/', 24 );
 
-	# It's also possible to pass a Array with the resource wildcards
+	# 2b. It's also possible to pass a Array with the resource wildcards
 	Slim\Http\Caching\ResourceMapper\Base::addResourceWildcard(
 		Array(
 			// Moderator data and list
@@ -45,21 +45,21 @@ Example
 		)
 	);	
 	
-	# You could also use a middleware. For that simple example i used a before.dispatch hook.
+	# 3. You could also use a middleware. For that simple example i used a before.dispatch hook.
 	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
 
-		# Create instance of your wished ResourceMapper (Etag() or Lastmodified())
-		$cachingManager = new Slim\Http\Caching\ResourceMapper\Etag();
+		# 4. Create instance of your wished ResourceMapper (ETag() or Lastmodified())
+		$cachingManager = new Slim\Http\Caching\ResourceMapper\ETag();
 
-		# Inject your ResourceHandler, Slim instance and finally set the headers
-		$cachingManager->setHandler( new Ezd\Caching\ResourceHandler( $db ) )
-			->setApplication( $app )
-			->setHeaders();
+		# 5. Inject your ResourceHandler, Slim instance and finally set the headers
+		$cachingManager->setHandler( new Ezd\Caching\ResourceHandler\FileStore\Json( 'cache.json' ) )
+			->setApplication( $app ) #6.
+			->setHeaders(); #7.
 
 	});
 
 	?>
 	
-That's it. ETag and Expires will be set automatically.
+If you want to have your data stored as a serialized string, just instantiate class "Serialized" instead of "Json"
 
 Have fun!
