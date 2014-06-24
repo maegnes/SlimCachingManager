@@ -31,26 +31,71 @@
  */
 namespace Slim\Http\Caching;
 
+/**
+ * Interface IResource
+ *
+ * @package Slim\Http\Caching
+ */
 interface IResource {
 
+    /**
+     * @param null $resource
+     *
+     * @return mixed
+     */
     public function setResource( $resource = null );
 
+    /**
+     * @return mixed
+     */
     public function getResource();
 
+    /**
+     * @param null $etag
+     *
+     * @return mixed
+     */
     public function setEtag( $etag = null );
 
+    /**
+     * @return mixed
+     */
     public function getEtag();
 
+    /**
+     * @param int $lifetime
+     *
+     * @return mixed
+     */
     public function setLifetime( $lifetime = 0 );
 
+    /**
+     * @return mixed
+     */
     public function getLifetime();
 
+    /**
+     * @param null $date
+     *
+     * @return mixed
+     */
     public function setExpiryDate( $date = null );
 
+    /**
+     * @return mixed
+     */
     public function getExpiryDate();
 
+    /**
+     * @param null $lastModified
+     *
+     * @return mixed
+     */
     public function setLastModified( $lastModified = null );
 
+    /**
+     * @return mixed
+     */
     public function getLastModified();
 
 }
