@@ -44,7 +44,7 @@ use SlimCachingManager\IResourceHandler;
  */
 interface IResourceMapper {
 
-    public function setApplication(Slim\Slim $app);
+    public function setApplication(Slim $app);
 
     public function getApplication();
 
