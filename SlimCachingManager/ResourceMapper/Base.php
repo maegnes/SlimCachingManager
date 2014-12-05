@@ -31,7 +31,8 @@
  */
 namespace SlimCachingManager\ResourceMapper;
 
-use Slim\Slim, Exception;
+use Slim\Slim;
+use Exception;
 use SlimCachingManager\IResource;
 use SlimCachingManager\IResourceHandler;
 
@@ -43,7 +44,7 @@ use SlimCachingManager\IResourceHandler;
  * @package Slim\Http\Caching
  * @author Magnus Buk <MagnusBuk@gmx.de>
  */
-abstract class Base implements IResourceMapper {
+abstract class Base {
 
     /**
      * Holds the resources which should be cached
@@ -133,14 +134,6 @@ abstract class Base implements IResourceMapper {
             throw new Exception( 'No valid ResourceHandler was set!' );
         return $this->_handler;
     }
-
-    /**
-     * Abstract method to set the needed headed for the choosen caching method
-     *
-     * @access public
-     * @return void
-     */
-    public abstract function setHeaders();
 
     /**
      * (1) Prepares the resource uri and formats it to correct syntax.

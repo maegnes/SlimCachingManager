@@ -31,9 +31,9 @@
  */
 namespace SlimCachingManager\ResourceMapper;
 
-use use SlimCachingManager\IResource;
+use SlimCachingManager\IResource;
 
-class LastModified extends Base {
+class LastModified extends Base implements IResourceMapper {
 
     /**
      * Set the headers for the last modified caching

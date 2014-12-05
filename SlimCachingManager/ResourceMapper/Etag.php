@@ -31,10 +31,9 @@
  */
 namespace SlimCachingManager\ResourceMapper;
 
-use Slim\Http\Caching as SlimCaching;
 use SlimCachingManager\IResource;
 
-class ETag extends Base {
+class ETag extends Base implements IResourceMapper {
 
     /**
      * Set the headers which are needed for ETag caching
