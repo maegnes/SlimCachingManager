@@ -2,7 +2,7 @@
 /**
  * Slim Caching Manager for the Slim Framework
  *
- * Use this class if you use Slim caching on resources which are being changed dynamically (e.g. background tasks)
+ * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
  * @author Magnus Buk <MagnusBuk@gmx.de>
@@ -29,33 +29,24 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching\ResourceMapper;
+namespace SlimCachingManager;
 
-use Slim\Http\Caching as SlimCaching;
-
-class ETag extends Base {
+interface IFileStore {
 
     /**
-     * Set the headers which are needed for ETag caching
+     * Define method to write data to the file (e.g. json_encode, serialize).
      *
-     * @access public
-     * @return void
+     * @param $data
+     * @return mixed
      */
-    public function setHeaders() {
+    public function writeFormat( $data );
 
-        $this->_prepareResource();
+    /**
+     * Define method to read data from the file (e.g. json_decode, unserialize).
+     *
+     * @param $data
+     * @return mixed
+     */
+    public function readFormat( $data );
 
-        $res = $this->getHandler()->read( $this->_resource );
-
-        if( $res instanceof SlimCaching\IResource ) {
-
-            // Set ETag
-            $this->getApplication()->etag( $res->getEtag() );
-
-            // Also set the "expires"-Header
-            $this->getApplication()->expires( '+' . $res->getLifetime() . ' hours' );
-
-        }
-
-    }
 }

@@ -29,8 +29,11 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching\ResourceMapper;
+namespace SlimCachingManager\ResourceMapper;
+
 use Slim\Slim, Exception;
+use SlimCachingManager\IResource;
+use SlimCachingManager\IResourceHandler;
 
 /**
  * Slim ResourceMapper
@@ -61,7 +64,7 @@ abstract class Base implements IResourceMapper {
      * ResourceHandler instance
      *
      * @access protected
-     * @var \Slim\Http\Caching\IResourceHandler
+     * @var IResourceHandler
      */
     protected $_handler = null;
 
@@ -110,10 +113,10 @@ abstract class Base implements IResourceMapper {
      * Set the resource handler
      *
      * @access public
-     * @param \Slim\Http\Caching\IResourceHandler $handler
+     * @param IResourceHandler $handler
      * @return self
      */
-    public function setHandler( \Slim\Http\Caching\IResourceHandler $handler ) {
+    public function setHandler( IResourceHandler $handler ) {
         $this->_handler = $handler;
         return $this;
     }
@@ -123,10 +126,10 @@ abstract class Base implements IResourceMapper {
      *
      * @access public
      * @throws Exception
-     * @return \Slim\Http\Caching\IResourceHandler
+     * @return IResourceHandler
      */
     public function getHandler() {
-        if( !$this->_handler instanceof \Slim\Http\Caching\IResourceHandler )
+        if( !$this->_handler instanceof IResourceHandler )
             throw new Exception( 'No valid ResourceHandler was set!' );
         return $this->_handler;
     }

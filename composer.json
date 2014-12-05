@@ -1,0 +1,22 @@
+{
+    "name": "maegnes/slim-caching-manager",
+    "description": " Caching Manager for the SLIM Framework",
+    "keywords": ["slim","caching","php"],
+    "homepage": "https://github.com/maegnes/SlimCachingManager",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Magnus Buk",
+            "email": "MagnusBuk@gmx.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "slim/slim": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "SlimCachingManager": "."
+        }
+    }
+}

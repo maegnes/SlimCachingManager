@@ -29,49 +29,73 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching;
+namespace SlimCachingManager;
 
 /**
- * Slim IResourceManager
- *
- * ResourceManager helps you to store and read data of cached resources
+ * Interface IResource
  *
  * @package Slim\Http\Caching
- * @author Magnus Buk <MagnusBuk@gmx.de>
  */
-interface IResourceHandler {
+interface IResource {
 
     /**
-     * Writes a new caching resource to the data store
+     * @param null $resource
      *
-     * @param String $resource
+     * @return mixed
+     */
+    public function setResource( $resource = null );
+
+    /**
+     * @return mixed
+     */
+    public function getResource();
+
+    /**
+     * @param null $etag
+     *
+     * @return mixed
+     */
+    public function setEtag( $etag = null );
+
+    /**
+     * @return mixed
+     */
+    public function getEtag();
+
+    /**
      * @param int $lifetime
+     *
      * @return mixed
      */
-    public function write( $resource, $lifetime );
+    public function setLifetime( $lifetime = 0 );
 
     /**
-     * Read the stored data for the given resource
-     *
-     * @param $resource
-     * @return IResource
-     */
-    public function read( $resource = null );
-
-    /**
-     * Garbage Collector - clear expired cache resources
-     *
-     * @access public
      * @return mixed
      */
-    public function gc();
+    public function getLifetime();
 
     /**
-     * Returns the cached resource as a object
+     * @param null $date
      *
-     * @access public
-     * @return IResource
+     * @return mixed
      */
-    public function getObject();
+    public function setExpiryDate( $date = null );
+
+    /**
+     * @return mixed
+     */
+    public function getExpiryDate();
+
+    /**
+     * @param null $lastModified
+     *
+     * @return mixed
+     */
+    public function setLastModified( $lastModified = null );
+
+    /**
+     * @return mixed
+     */
+    public function getLastModified();
 
 }

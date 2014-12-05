@@ -29,24 +29,49 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching;
+namespace SlimCachingManager;
 
-interface IFileStore {
+/**
+ * Slim IResourceManager
+ *
+ * ResourceManager helps you to store and read data of cached resources
+ *
+ * @package Slim\Http\Caching
+ * @author Magnus Buk <MagnusBuk@gmx.de>
+ */
+interface IResourceHandler {
 
     /**
-     * Define method to write data to the file (e.g. json_encode, serialize).
+     * Writes a new caching resource to the data store
      *
-     * @param $data
+     * @param String $resource
+     * @param int $lifetime
      * @return mixed
      */
-    public function writeFormat( $data );
+    public function write( $resource, $lifetime );
 
     /**
-     * Define method to read data from the file (e.g. json_decode, unserialize).
+     * Read the stored data for the given resource
      *
-     * @param $data
+     * @param $resource
+     * @return IResource
+     */
+    public function read( $resource = null );
+
+    /**
+     * Garbage Collector - clear expired cache resources
+     *
+     * @access public
      * @return mixed
      */
-    public function readFormat( $data );
+    public function gc();
+
+    /**
+     * Returns the cached resource as a object
+     *
+     * @access public
+     * @return IResource
+     */
+    public function getObject();
 
 }

@@ -2,7 +2,7 @@
 /**
  * Slim Caching Manager for the Slim Framework
  *
- * Use this class if you use Slim caching on resources which are being changed dynamically (e.g. background tasks)
+ * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
  * @author Magnus Buk <MagnusBuk@gmx.de>
@@ -29,30 +29,29 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching\ResourceMapper;
+namespace SlimCachingManager\ResourceMapper;
 
-use Slim\Http\Caching as SlimCaching;
+use Slim\Slim;
+use SlimCachingManager\IResourceHandler;
 
-class LastModified extends Base {
+/**
+ * Slim IResourceManager
+ *
+ * Interface for all ResourceMappers
+ *
+ * @package Slim\Http\Caching
+ * @author Magnus Buk <MagnusBuk@gmx.de>
+ */
+interface IResourceMapper {
 
-    /**
-     * Set the headers for the last modified caching
-     *
-     * @access public
-     * @return void
-     */
-    public function setHeaders() {
+    public function setApplication(Slim\Slim $app);
 
-		$this->_prepareResource();
+    public function getApplication();
 
-		$res = $this->getHandler()->read( $this->_resource );
+    public function setHandler(IResourceHandler $handler );
 
-		if( $res instanceof SlimCaching\IResource ) {
+    public function getHandler();
 
-			// Set Last Modified date
-			$this->getApplication()->lastModified( $res->getLastModified() );
+    public function setHeaders();
 
-		}
-
-	}
 }

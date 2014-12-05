@@ -2,7 +2,7 @@
 /**
  * Slim Caching Manager for the Slim Framework
  *
- * Use this class if you use Slim caching on resources which are being changed dynamically.
+ * Use this class if you use Slim caching on resources which are being changed dynamically (e.g. background tasks)
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
  * @author Magnus Buk <MagnusBuk@gmx.de>
@@ -29,73 +29,29 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http\Caching;
+namespace SlimCachingManager\ResourceMapper;
 
-/**
- * Interface IResource
- *
- * @package Slim\Http\Caching
- */
-interface IResource {
+use use SlimCachingManager\IResource;
+
+class LastModified extends Base {
 
     /**
-     * @param null $resource
+     * Set the headers for the last modified caching
      *
-     * @return mixed
+     * @access public
+     * @return void
      */
-    public function setResource( $resource = null );
+    public function setHeaders() {
 
-    /**
-     * @return mixed
-     */
-    public function getResource();
+		$this->_prepareResource();
 
-    /**
-     * @param null $etag
-     *
-     * @return mixed
-     */
-    public function setEtag( $etag = null );
+		$res = $this->getHandler()->read( $this->_resource );
 
-    /**
-     * @return mixed
-     */
-    public function getEtag();
+		if( $res instanceof IResource ) {
 
-    /**
-     * @param int $lifetime
-     *
-     * @return mixed
-     */
-    public function setLifetime( $lifetime = 0 );
+			// Set Last Modified date
+			$this->getApplication()->lastModified( $res->getLastModified() );
 
-    /**
-     * @return mixed
-     */
-    public function getLifetime();
-
-    /**
-     * @param null $date
-     *
-     * @return mixed
-     */
-    public function setExpiryDate( $date = null );
-
-    /**
-     * @return mixed
-     */
-    public function getExpiryDate();
-
-    /**
-     * @param null $lastModified
-     *
-     * @return mixed
-     */
-    public function setLastModified( $lastModified = null );
-
-    /**
-     * @return mixed
-     */
-    public function getLastModified();
-
+		}
+	}
 }
