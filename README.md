@@ -22,7 +22,7 @@ Add the following dependency to your composer.json file.
 
     {
         "require": {
-			"maegnes/zf2doctrine2sqlsrv": "dev-master"
+			"maegnes/slim-caching-manager": "dev-master"
         }
     }
 
