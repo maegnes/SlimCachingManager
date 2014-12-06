@@ -19,6 +19,7 @@ Magnus
 Installation via Composer
 --------
 Add the following dependency to your composer.json file.
+
     {
         "require": {
 			"maegnes/zf2doctrine2sqlsrv": "dev-master"
