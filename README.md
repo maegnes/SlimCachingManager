@@ -69,7 +69,7 @@ Example
 	});
 
 	?>
-	
-If you want to have your data stored as a serialized string, just instantiate class "Serialized" instead of "Json"
+
+Example ResourceHandlers are coming soon.
 
 Have fun!
