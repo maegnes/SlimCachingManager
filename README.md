@@ -16,12 +16,21 @@ If you have any questions or suggestions to improve **SlimCachingManager** feel 
 Best regards
 Magnus
 
+Installation via Composer
+--------
+Add the following dependency to your composer.json file.
+    {
+        "require": {
+			"maegnes/zf2doctrine2sqlsrv": "dev-master"
+        }
+    }
+
 Usage
 --------
 1. Create instance of Slim
 2. Add resources to the ResourceMapper which should be cached (Wildcards allowed!)
 3. Add a before.dispatch hook or middleware (in the example it's done by hook)
-4. Create instance of Slim\Http\Caching\ResourceMapper\Etag() or Slim\Http\Caching\ResourceMapper\Lastmodified() (depends on needed cache method)
+4. Create instance of SlimCachingManager\ResourceMapper\Etag() or SlimCachingManager\ResourceMapper\Lastmodified() (depends on needed cache method)
 5. Inject your own ResourceHandler into ResourceMapper
 6. Inject the Slim application into ResourceMapper
 7. Call method setHeaders()
@@ -31,13 +40,13 @@ Example
 	<?php
 	
 	# 1. Create Slim instance
-	$app = new \Slim\Slim();
+	$app = new Slim();
 	
 	# 2a. Add resource '/fetch/my/resource/' to my cache list
-	Slim\Http\Caching\ResourceMapper\Base::addResourceWildcard( '/fetch/my/resource/', 24 );
+	\SlimCachingManager\ResourceMapper\Base::addResourceWildcard( '/fetch/my/resource/', 24 );
 
 	# 2b. It's also possible to pass a Array with the resource wildcards
-	Slim\Http\Caching\ResourceMapper\Base::addResourceWildcard(
+	\SlimCachingManager\ResourceMapper\Base::addResourceWildcard(
 		Array(
 			// Moderator data and list
 			'/fetch/moderator/data/' => 24,
@@ -49,10 +58,10 @@ Example
 	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
 
 		# 4. Create instance of your wished ResourceMapper (ETag() or Lastmodified())
-		$cachingManager = new Slim\Http\Caching\ResourceMapper\ETag();
+		$cachingManager = new \SlimCachingManager\ResourceMapper\ETag();
 
 		# 5. Inject your ResourceHandler, Slim instance and finally set the headers
-		$cachingManager->setHandler( new Ezd\Caching\ResourceHandler\FileStore\Json( 'cache.json' ) )
+		$cachingManager->setHandler( new (YOUR OWN RESOURCE HANDLER IMPLEMENTING IResourceHandler Interface) )
 			->setApplication( $app ) #6.
 			->setHeaders(); #7.
 
