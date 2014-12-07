@@ -32,7 +32,7 @@ Usage
 2. Add resources to the ResourceMapper which should be cached (Wildcards allowed!)
 3. Add a before.dispatch hook or middleware (in the example it's done by hook)
 4. Create instance of SlimCachingManager\ResourceMapper\Etag() or SlimCachingManager\ResourceMapper\Lastmodified() (depends on needed cache method)
-5. Inject your own ResourceHandler into ResourceMapper
+5. Inject your the ResourceHandler into ResourceMapper
 6. Inject the Slim application into ResourceMapper
 7. Call method setHeaders()
 
@@ -44,7 +44,7 @@ Example
 	$app = new Slim();
 	
 	# 2a. Add resource '/fetch/my/resource/' to my cache list
-	\SlimCachingManager\ResourceMapper\Base::addResourceWildcard( '/fetch/my/resource/', 24 );
+	\SlimCachingManager\ResourceMapper\Base::addResourceWildcard('/fetch/my/resource/', 24);
 
 	# 2b. It's also possible to pass a Array with the resource wildcards
 	\SlimCachingManager\ResourceMapper\Base::addResourceWildcard(
@@ -56,20 +56,21 @@ Example
 	);	
 	
 	# 3. You could also use a middleware. For that simple example i used a before.dispatch hook.
-	$app->hook( 'slim.before.dispatch', function () use ( $app, $db ) {
+	$app->hook('slim.before.dispatch', function () use ($app, $db) {
 
 		# 4. Create instance of your wished ResourceMapper (ETag() or Lastmodified())
 		$cachingManager = new \SlimCachingManager\ResourceMapper\ETag();
 
 		# 5. Inject your ResourceHandler, Slim instance and finally set the headers
-		$cachingManager->setHandler( new (YOUR OWN RESOURCE HANDLER IMPLEMENTING IResourceHandler Interface) )
-			->setApplication( $app ) #6.
+		$cachingManager->setHandler(new \SlimCachingManager\ResourceHandler\Textfile())
+			->setApplication($app) #6.
 			->setHeaders(); #7.
 
 	});
 
 	?>
 
-Example ResourceHandlers are coming soon.
+If you want do not want to use the "Textfile" Resourcehandler just write your own by implementing
+**SlimCachingManager\ResourceHandler\IResourceHandler**!
 
 Have fun!

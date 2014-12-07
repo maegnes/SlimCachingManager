@@ -32,7 +32,7 @@
 namespace SlimCachingManager\ResourceMapper;
 
 use Slim\Slim;
-use SlimCachingManager\IResourceHandler;
+use SlimCachingManager\ResourceHandler\IResourceHandler;
 
 /**
  * Slim IResourceManager

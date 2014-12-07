@@ -33,8 +33,7 @@ namespace SlimCachingManager\ResourceMapper;
 
 use Slim\Slim;
 use Exception;
-use SlimCachingManager\IResource;
-use SlimCachingManager\IResourceHandler;
+use SlimCachingManager\ResourceHandler\IResourceHandler;
 
 /**
  * Slim ResourceMapper
