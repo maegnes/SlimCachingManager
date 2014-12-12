@@ -36,7 +36,7 @@ namespace SlimCachingManager\ResourceHandler;
  *
  * ResourceManager helps you to store and read data of cached resources
  *
- * @package Slim\Http\Caching
+ * @package SlimCachingManager\ResourceHandler
  * @author Magnus Buk <MagnusBuk@gmx.de>
  */
 interface IResourceHandler {

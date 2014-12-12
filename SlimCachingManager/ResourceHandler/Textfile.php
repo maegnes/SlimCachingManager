@@ -4,7 +4,7 @@
  *
  * Write and read cached resources to textfile
  *
- * @author Magnus Buk <Magnus.Buk@gmx.de>
+ * @author Magnus Buk <MagnusBuk@gmx.de>
  */
 namespace SlimCachingManager\ResourceHandler;
 
@@ -22,13 +22,11 @@ class Textfile implements IResourceHandler
     protected $_data = Array();
 
     /**
-     * @var null
+     * @var string
      */
     private $_file = 'cache.txt';
 
     /**
-     * Constructor. inject database connection and fetch caching data
-     *
      * @access public
      */
     public function __construct()
@@ -57,11 +55,8 @@ class Textfile implements IResourceHandler
     {
 
         if (!file_exists($this->_file)) {
-            $handle = fopen($this->_file, 'a');
-            fwrite($handle, 'a:0:{}');
-            fclose($handle);
+            file_put_contents($this->_file, 'a:0:{}');
         }
-
         $this->_data = unserialize(file_get_contents($this->_file));
 
     }
