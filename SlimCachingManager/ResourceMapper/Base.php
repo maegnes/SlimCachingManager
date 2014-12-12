@@ -5,7 +5,7 @@
  * Use this class if you use Slim caching on resources which are being changed dynamically (e.g. background tasks)
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  * @version 1.0
  *
  * MIT LICENSE
@@ -31,8 +31,8 @@
  */
 namespace SlimCachingManager\ResourceMapper;
 
-use Slim\Slim;
 use Exception;
+use Slim\Slim;
 use SlimCachingManager\ResourceHandler\IResourceHandler;
 
 /**
@@ -41,9 +41,10 @@ use SlimCachingManager\ResourceHandler\IResourceHandler;
  * ResourceMapper checks if current resource has caching entries and/or adds them to selected data adapter (via IResourceHandler)
  *
  * @package Slim\Http\Caching
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  */
-abstract class Base {
+abstract class Base
+{
 
     /**
      * Holds the resources which should be cached
@@ -82,7 +83,8 @@ abstract class Base {
      * @access public
      * @return self
      */
-    public function __construct() {
+    public function __construct()
+    {
         return $this;
     }
 
@@ -90,9 +92,11 @@ abstract class Base {
      * Injects the current Slim application instance
      *
      * @param Slim $app
+     *
      * @return self
      */
-    public function setApplication( Slim $app ) {
+    public function setApplication(Slim $app)
+    {
         $this->_app = $app;
         return $this;
     }
@@ -103,9 +107,11 @@ abstract class Base {
      * @access public
      * @return Slim
      */
-    public function getApplication() {
-        if( !$this->_app instanceof Slim )
-            throw new Exception( 'No valid Slim instance was set!' );
+    public function getApplication()
+    {
+        if (!$this->_app instanceof Slim) {
+            throw new Exception('No valid Slim instance was set!');
+        }
         return $this->_app;
     }
 
@@ -113,10 +119,13 @@ abstract class Base {
      * Set the resource handler
      *
      * @access public
+     *
      * @param IResourceHandler $handler
+     *
      * @return self
      */
-    public function setHandler( IResourceHandler $handler ) {
+    public function setHandler(IResourceHandler $handler)
+    {
         $this->_handler = $handler;
         return $this;
     }
@@ -128,9 +137,11 @@ abstract class Base {
      * @throws Exception
      * @return IResourceHandler
      */
-    public function getHandler() {
-        if( !$this->_handler instanceof IResourceHandler )
-            throw new Exception( 'No valid ResourceHandler was set!' );
+    public function getHandler()
+    {
+        if (!$this->_handler instanceof IResourceHandler) {
+            throw new Exception('No valid ResourceHandler was set!');
+        }
         return $this->_handler;
     }
 
@@ -142,17 +153,20 @@ abstract class Base {
      * @access protected
      * @return void
      */
-    protected function _prepareResource() {
+    protected function _prepareResource()
+    {
 
-        if( substr( $this->getApplication()->request()->getResourceUri(), -1 ) == '/' )
+        if (substr($this->getApplication()->request()->getResourceUri(), -1) == '/') {
             $this->_resource = $this->getApplication()->request()->getResourceUri();
-        else
+        } else {
             $this->_resource = $this->getApplication()->request()->getResourceUri() . '/';
+        }
 
         // Check if the resource can be matched with a wildcard resource
-        foreach( self::$_resourceWildcards as $wildcard => $lifetime ) {
-            if( $wildcard == substr( $this->_resource, 0, strlen( $wildcard ) ) )
-                    $this->getHandler()->write( $this->_resource, $lifetime );
+        foreach (self::$_resourceWildcards as $wildcard => $lifetime) {
+            if ($wildcard == substr($this->_resource, 0, strlen($wildcard))) {
+                $this->getHandler()->write($this->_resource, $lifetime);
+            }
         }
     }
 
@@ -163,13 +177,16 @@ abstract class Base {
      * e.g. Array( '/fetch/test/', 24 );
      *
      * @param array $data
+     * @param int   $lifetime
+     *
      * @return void
      */
-    public static function addResourceWildcard( $data = null, $lifetime = 0 ) {
-        if( is_array( $data ) )
-            self::$_resourceWildcards = array_merge( self::$_resourceWildcards, $data );
-        else
+    public static function addResourceWildcard($data = null, $lifetime = 0)
+    {
+        if (is_array($data)) {
+            self::$_resourceWildcards = array_merge(self::$_resourceWildcards, $data);
+        } else {
             self::$_resourceWildcards[$data] = $lifetime;
+        }
     }
-
 }

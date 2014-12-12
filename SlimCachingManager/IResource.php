@@ -5,7 +5,7 @@
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  * @version 1.0
  *
  * MIT LICENSE
@@ -36,14 +36,15 @@ namespace SlimCachingManager;
  *
  * @package Slim\Http\Caching
  */
-interface IResource {
+interface IResource
+{
 
     /**
      * @param null $resource
      *
      * @return mixed
      */
-    public function setResource( $resource = null );
+    public function setResource($resource = null);
 
     /**
      * @return mixed
@@ -55,7 +56,7 @@ interface IResource {
      *
      * @return mixed
      */
-    public function setEtag( $etag = null );
+    public function setEtag($etag = null);
 
     /**
      * @return mixed
@@ -67,7 +68,7 @@ interface IResource {
      *
      * @return mixed
      */
-    public function setLifetime( $lifetime = 0 );
+    public function setLifetime($lifetime = 0);
 
     /**
      * @return mixed
@@ -79,7 +80,7 @@ interface IResource {
      *
      * @return mixed
      */
-    public function setExpiryDate( $date = null );
+    public function setExpiryDate($date = null);
 
     /**
      * @return mixed
@@ -91,7 +92,7 @@ interface IResource {
      *
      * @return mixed
      */
-    public function setLastModified( $lastModified = null );
+    public function setLastModified($lastModified = null);
 
     /**
      * @return mixed

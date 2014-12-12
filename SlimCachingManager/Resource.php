@@ -5,7 +5,7 @@
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  * @version 1.0
  *
  * MIT LICENSE
@@ -33,9 +33,11 @@ namespace SlimCachingManager;
 
 /**
  * Class Resource
+ *
  * @package Slim\Http\Caching
  */
-class Resource implements IResource {
+class Resource implements IResource
+{
 
     /**
      * URI of the current resource
@@ -76,73 +78,84 @@ class Resource implements IResource {
     /**
      * @param null $eTag
      */
-    public function setETag( $eTag = null ) {
+    public function setETag($eTag = null)
+    {
         $this->_eTag = $eTag;
     }
 
     /**
      * @return null
      */
-    public function getETag() {
+    public function getETag()
+    {
         return $this->_eTag;
     }
 
     /**
      * @param null $lifeTime
      */
-    public function setLifeTime( $lifeTime = 0 ) {
+    public function setLifeTime($lifeTime = 0)
+    {
         $this->_lifeTime = $lifeTime;
     }
 
     /**
      * @return null
      */
-    public function getLifeTime() {
+    public function getLifeTime()
+    {
         return $this->_lifeTime;
     }
 
     /**
      * @param null $resource
      */
-    public function setResource( $resource = null ) {
+    public function setResource($resource = null)
+    {
         $this->_resource = $resource;
     }
 
     /**
      * @return null
      */
-    public function getResource() {
+    public function getResource()
+    {
         return $this->_resource;
     }
 
     /**
      * @param String $expiryDate
      */
-    public function setExpiryDate( $expiryDate = null ) {
+    public function setExpiryDate($expiryDate = null)
+    {
         $this->_expiryDate = $expiryDate;
     }
 
     /**
      * @return String
      */
-    public function getExpiryDate() {
+    public function getExpiryDate()
+    {
         return $this->_expiryDate;
     }
 
     /**
      * @param String $lastModified
      */
-    public function setLastModified( $lastModified = null ) {
-        if( !is_null( $lastModified ) && !strtotime( $lastModified ) )
-            throw new \Exception( 'invalid date given' );
+    public function setLastModified($lastModified = null)
+    {
+        if (!is_null($lastModified) && !strtotime($lastModified)) {
+            throw new \Exception('invalid date given');
+        }
         $this->_lastModified = $lastModified;
     }
 
     /**
      * @return String
      */
-    public function getLastModified() {
-        return strtotime( $this->_lastModified );
+    public function getLastModified()
+    {
+        return strtotime($this->_lastModified);
     }
 
 }

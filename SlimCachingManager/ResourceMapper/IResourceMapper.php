@@ -5,7 +5,7 @@
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  * @version 1.0
  *
  * MIT LICENSE
@@ -40,15 +40,16 @@ use SlimCachingManager\ResourceHandler\IResourceHandler;
  * Interface for all ResourceMappers
  *
  * @package Slim\Http\Caching
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  */
-interface IResourceMapper {
+interface IResourceMapper
+{
 
     public function setApplication(Slim $app);
 
     public function getApplication();
 
-    public function setHandler(IResourceHandler $handler );
+    public function setHandler(IResourceHandler $handler);
 
     public function getHandler();
 

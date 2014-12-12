@@ -5,7 +5,7 @@
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  * @version 1.0
  *
  * MIT LICENSE
@@ -37,26 +37,29 @@ namespace SlimCachingManager\ResourceHandler;
  * ResourceManager helps you to store and read data of cached resources
  *
  * @package SlimCachingManager\ResourceHandler
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  */
-interface IResourceHandler {
+interface IResourceHandler
+{
 
     /**
      * Writes a new caching resource to the data store
      *
      * @param String $resource
-     * @param int $lifetime
+     * @param int    $lifetime
+     *
      * @return mixed
      */
-    public function write( $resource, $lifetime );
+    public function write($resource, $lifetime);
 
     /**
      * Read the stored data for the given resource
      *
      * @param $resource
+     *
      * @return IResource
      */
-    public function read( $resource = null );
+    public function read($resource = null);
 
     /**
      * Garbage Collector - clear expired cache resources

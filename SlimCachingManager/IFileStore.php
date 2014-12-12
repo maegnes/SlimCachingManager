@@ -5,7 +5,7 @@
  * Use this class if you use Slim caching on resources which are being changed dynamically.
  * You can use ResourceHandler to store the cached data (Resource, Lifetime) wherever you want.
  *
- * @author Magnus Buk <MagnusBuk@gmx.de>
+ * @author  Magnus Buk <MagnusBuk@gmx.de>
  * @version 1.0
  *
  * MIT LICENSE
@@ -31,22 +31,25 @@
  */
 namespace SlimCachingManager;
 
-interface IFileStore {
+interface IFileStore
+{
 
     /**
      * Define method to write data to the file (e.g. json_encode, serialize).
      *
      * @param $data
+     *
      * @return mixed
      */
-    public function writeFormat( $data );
+    public function writeFormat($data);
 
     /**
      * Define method to read data from the file (e.g. json_decode, unserialize).
      *
      * @param $data
+     *
      * @return mixed
      */
-    public function readFormat( $data );
+    public function readFormat($data);
 
 }
