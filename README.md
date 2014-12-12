@@ -70,7 +70,7 @@ Example
 
 	?>
 
-If you want do not want to use the "Textfile" Resourcehandler just write your own by implementing
+If you don't want to use the "Textfile" Resourcehandler just write your own by implementing
 **SlimCachingManager\ResourceHandler\IResourceHandler**!
 
 Have fun!
