@@ -1,7 +1,7 @@
 SlimCachingManager
 ==================
 
-Works under https://github.com/codeguy/Slim >= ~2.3 (>= 2.3 AND < 3.0)
+Works under https://github.com/codeguy/Slim ~2.3 (>= 2.3 AND < 3.0)
 
 The **SlimCachingManager** helps you to simplify caching and the delivery of the cached data of the Slim Framework resources. It stores the caching data for each resource (etag, expiry, lastmodified etc.) in ResourceHandlers
 which can be written on your own by implementing the *IResourceHandler*.
