@@ -140,7 +140,7 @@ class Textfile implements IResourceHandler
         $obj->setETag($res['etag']);
         $obj->setResource($res['resource']);
         $obj->setLifeTime($res['lifetime']);
-        $obj->setExpiryDate($res['clear_cache']);
+        $obj->setExpiryDate($res['expiry_date']);
         $obj->setLastModified($res['last_modified']);
         return $obj;
     }
