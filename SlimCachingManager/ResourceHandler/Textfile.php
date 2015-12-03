@@ -72,7 +72,7 @@ class Textfile implements IResourceHandler
      */
     public function read($resource = null)
     {
-        return (is_array($this->_data[$resource])) ? $this->getObject($this->_data[$resource]) : null;
+        return (isset($this->_data[$resource]) && is_array($this->_data[$resource])) ? $this->getObject($this->_data[$resource]) : null;
     }
 
     /**
